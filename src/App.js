@@ -1,10 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const App = () => {
   const [books, setBooks] = useState([])
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
+
+  // fetching all books
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:4000/books')
+      .then(res => {
+        console.log('promise fulfilled')
+        setBooks(res.data)
+    })
+  }, []) // empty array means only running useEffect after first render
+  // console.log('render', books.length, 'books')
+  console.log('Here are your books: ', books)
+
+  const Book = ({ title, author, id }) => {
+    console.log({id})
+    console.log({title})
+    return (
+      <li key={id}>
+        <h3>{title}</h3>
+        <p>{author}</p>
+      </li>
+    )
+  }
 
   const addBook = (event) => {
     event.preventDefault()
@@ -56,6 +80,11 @@ const App = () => {
       <br></br>
       <div>
         <h1>Luetut kirjat</h1>
+        <ul style={{listStyleType: "none"}}>
+          {books.map(book =>
+            <Book title={book.title} author={book.author} id={book.id}/>
+          )}
+        </ul>
       </div>
     </div>
   )
