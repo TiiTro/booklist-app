@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import AddNewBookForm from './blocks/AddNewBookForm.jsx';
+
 const App = () => {
   const [books, setBooks] = useState([])
   const [newTitle, setNewTitle] = useState('')
@@ -17,11 +19,11 @@ const App = () => {
     })
   }, []) // empty array means only running useEffect after first render
   // console.log('render', books.length, 'books')
-  console.log('Here are your books: ', books)
+  // console.log('Here are your books: ', books)
 
   const Book = ({ title, author, id }) => {
-    console.log({id})
-    console.log({title})
+    // console.log({id})
+    // console.log({title})
     return (
       <li key={id}>
         <h3>{title}</h3>
@@ -39,13 +41,14 @@ const App = () => {
     }
 
     console.log(bookObject)
-
-    // use concat to add new object without modifying state directly!
-    // setBooks(books.concat(bookObject))
-    console.log(books)
+    // console.log(books)
 
     axios.post('http://localhost:4000/books/add', bookObject)
-      .then(res => console.log(res.data));
+      .then(res => {
+        // use concat to add new object without modifying state directly!
+        setBooks(books.concat(bookObject))
+        console.log(res.data)
+      });
 
     setNewTitle('')
     setNewAuthor('')
@@ -53,30 +56,23 @@ const App = () => {
 
   //event handler sets the state for new book to be the value of input
   const handleNewTitle = (event) => {
-    // console.log(event.target.value)
+    console.log(event.target.value)
     setNewTitle(event.target.value)
   }
 
   const handleNewAuthor = (event) => {
-    // console.log(event.target.value)
+    console.log(event.target.value)
     setNewAuthor(event.target.value)
   }
 
   return (
     <div>
-      <form onSubmit={addBook}>
-        <label>
-          Kirjan nimi:
-        </label>
-        <input value={newTitle} onChange={handleNewTitle}/>
-        <br></br>
-        <br></br>
-        <label>
-          Kirjoittaja:
-        </label>
-        <input value={newAuthor} onChange={handleNewAuthor}/>
-        <button type="submit">Tallenna</button>
-      </form>
+      <AddNewBookForm 
+        newTitle={newTitle}
+        newAuthor={newAuthor}
+        onSubmit={addBook}
+        handleNewTitle={handleNewTitle}
+        handleNewAuthor={handleNewAuthor} />
       <br></br>
       <div>
         <h1>Luetut kirjat</h1>
