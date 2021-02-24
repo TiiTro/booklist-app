@@ -7,6 +7,7 @@ const App = () => {
   const [books, setBooks] = useState([])
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
+  const [newCom, setNewComment] = useState('')
 
   // fetching all books
   useEffect(() => {
@@ -21,13 +22,15 @@ const App = () => {
   // console.log('render', books.length, 'books')
   // console.log('Here are your books: ', books)
 
-  const Book = ({ title, author, id }) => {
+  const Book = ({ title, author, comments, id }) => {
     // console.log({id})
     // console.log({title})
+    console.log({comments})
     return (
       <li key={id}>
         <h3>{title}</h3>
         <p>{author}</p>
+        <p>{comments}</p>
       </li>
     )
   }
@@ -37,7 +40,7 @@ const App = () => {
     const bookObject = {
       title: newTitle,
       author: newAuthor,
-      id: books.length + 1,
+      comment: newCom
     }
 
     console.log(bookObject)
@@ -50,6 +53,7 @@ const App = () => {
         console.log(res.data)
       });
 
+    setNewComment('')
     setNewTitle('')
     setNewAuthor('')
   }
@@ -65,6 +69,11 @@ const App = () => {
     setNewAuthor(event.target.value)
   }
 
+  const handleNewCom = (event) => {
+    console.log(event.target.value)
+    setNewComment(event.target.value)
+  }
+
   return (
     <div>
       <AddNewBookForm 
@@ -72,13 +81,16 @@ const App = () => {
         newAuthor={newAuthor}
         onSubmit={addBook}
         handleNewTitle={handleNewTitle}
-        handleNewAuthor={handleNewAuthor} />
+        handleNewAuthor={handleNewAuthor}
+        newComment={newCom}
+        handleNewCom={handleNewCom}
+         />
       <br></br>
       <div>
         <h1>Luetut kirjat</h1>
         <ul style={{listStyleType: "none"}}>
           {books.map(book =>
-            <Book title={book.title} author={book.author} id={book.id}/>
+            <Book title={book.title} author={book.author} comments={book.comment} id={book.id}/>
           )}
         </ul>
       </div>

@@ -6,11 +6,12 @@ const AddNewBookForm = (props) => {
   const {
     newTitle,
     newAuthor,
+    newCom,
     onSubmit,
 	  handleNewTitle,
 	  handleNewAuthor,
-    submit,
-    buttonText 
+    handleNewCom,
+    submit
   } = props;
 
   return (
@@ -27,7 +28,13 @@ const AddNewBookForm = (props) => {
 		    	label={"Kirjoittaja"}
 			    value={newAuthor}
           onChange={handleNewAuthor}
-			    />
+			  />
+          <br></br>
+          <Input 
+		    	label={"Kommentit"}
+			    value={newCom}
+          onChange={handleNewCom}
+			  />
           <Button 
             type={submit}
             buttonText={"Tallenna"}/>

@@ -17,11 +17,15 @@ routes.route('/add').post((req, res) => {
     //assign the infromation to variables
     const title = req.body.title;
     const author = req.body.author;
+    const comments = req.body.comments;
+    const date = Date.parse(req.body.date);
 
     //Creating a new book with the variables assigned above
     const newBook = new Book({
         title,
-        author
+        author,
+        comments,
+        date
     });
 
     newBook.save()
@@ -50,6 +54,8 @@ routes.route('/update/:id').post((req, res) => {
             // assigning the updated information to variables that already exist
             book.title = req.body.title;
             book.author = req.body.author;
+            book.comments = req.body.comments;
+            book.date = req.body.date;
 
             book.save()
                 .then(() => res.json('Book updated'))

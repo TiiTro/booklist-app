@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    title: String,
-    author: String
+    title: { type: String, required: true },
+    author: String,
+    comments: String
 });
 
 // Modifying the mongoose id to be a string, deleting _id and __v fields from schema
