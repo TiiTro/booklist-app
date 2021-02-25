@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import AddNewBookForm from './blocks/AddNewBookForm.jsx';
+import BookList from './blocks/BookList.jsx';
 
 const App = () => {
   const [books, setBooks] = useState([])
@@ -21,19 +22,6 @@ const App = () => {
   }, []) // empty array means only running useEffect after first render
   // console.log('render', books.length, 'books')
   // console.log('Here are your books: ', books)
-
-  const Book = ({ title, author, comments, id }) => {
-    // console.log({id})
-    // console.log({title})
-    console.log({comments})
-    return (
-      <li key={id}>
-        <h3>{title}</h3>
-        <p>{author}</p>
-        <p>{comments}</p>
-      </li>
-    )
-  }
 
   const addBook = (event) => {
     event.preventDefault()
@@ -87,12 +75,7 @@ const App = () => {
          />
       <br></br>
       <div>
-        <h1>Luetut kirjat</h1>
-        <ul style={{listStyleType: "none"}}>
-          {books.map(book =>
-            <Book title={book.title} author={book.author} comments={book.comment} id={book.id}/>
-          )}
-        </ul>
+        <BookList books={books}/>
       </div>
     </div>
   )
