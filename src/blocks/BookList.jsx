@@ -14,7 +14,7 @@ const BookList = ({ books, handleDelete }) => {
               onClick={() => handleDelete(book)}
               title={book.title}
               author={book.author}
-              comments={book.comment}
+              comments={book.comments}
               id={book.id}
               />
           )}

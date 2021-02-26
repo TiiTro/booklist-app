@@ -5,7 +5,7 @@ const Book = ({ title, author, comments, index, onClick}) => {
   // console.log({id})
   // console.log({title})
   // console.log({comments})
-  console.log(title, index);
+  // console.log(title, index);
   return (
     <div>
       <li key={index}>

@@ -28,37 +28,37 @@ const App = () => {
     const bookObject = {
       title: newTitle,
       author: newAuthor,
-      comment: newCom
+      comments: newCom
     }
 
-    console.log(bookObject)
+    console.log("Kirja lisätään", bookObject)
     // console.log(books)
 
     axios.post('http://localhost:4000/books/add', bookObject)
       .then(res => {
         // use concat to add new object without modifying state directly!
         setBooks(books.concat(bookObject))
-        console.log(res.data)
+        console.log("axios", res.data)
       });
 
-    setNewComment('')
     setNewTitle('')
     setNewAuthor('')
+    setNewComment('')
   }
 
   //event handler sets the state for new book to be the value of input
   const handleNewTitle = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     setNewTitle(event.target.value)
   }
 
   const handleNewAuthor = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     setNewAuthor(event.target.value)
   }
 
   const handleNewCom = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     setNewComment(event.target.value)
   }
   
@@ -85,8 +85,8 @@ const App = () => {
         onSubmit={addBook}
         handleNewTitle={handleNewTitle}
         handleNewAuthor={handleNewAuthor}
-        // newComment={newCom}
-        // handleNewCom={handleNewCom}
+        newCom={newCom}
+        handleNewCom={handleNewCom}
          />
       <br></br>
       <div>

@@ -29,12 +29,12 @@ const AddNewBookForm = (props) => {
 			    value={newAuthor}
           onChange={handleNewAuthor}
 			  />
-          {/* <br></br>
+          <br></br>
           <Input 
 		    	label={"Kommentit"}
 			    value={newCom}
           onChange={handleNewCom}
-			  /> */}
+			  />
           <Button 
             type={submit}
             buttonText={"Tallenna"}/>
