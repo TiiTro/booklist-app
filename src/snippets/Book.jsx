@@ -8,7 +8,7 @@ const Book = ({ title, author, comments, index, onClick}) => {
   // console.log(title, index);
   return (
     <div>
-      <li key={index}>
+      <li>
         <h3>{title}</h3>
         <p>{author}</p>
         <p>{comments}</p>

@@ -10,7 +10,7 @@ const BookList = ({ books, handleDelete }) => {
         <ul style={{listStyleType: "none"}}>
           {books.map((book) =>
             <Book 
-              index={book.id}
+              key={book.id}
               onClick={() => handleDelete(book)}
               title={book.title}
               author={book.author}
