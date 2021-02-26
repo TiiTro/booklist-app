@@ -61,6 +61,21 @@ const App = () => {
     console.log(event.target.value)
     setNewComment(event.target.value)
   }
+  
+  const handleDelete = (book) => {
+    console.log("Delete clicked");
+    console.log(book.id);
+
+    axios.delete('http://localhost:4000/books/'+book.id)
+      .then(res => {
+        console.log(res.data, book.title);
+      
+      const updatedBookList = books.filter(b => b.id !== book.id);
+      
+      setBooks(updatedBookList);
+      console.log("Updated book list: ", updatedBookList);
+      })
+  }
 
   return (
     <div>
@@ -70,12 +85,12 @@ const App = () => {
         onSubmit={addBook}
         handleNewTitle={handleNewTitle}
         handleNewAuthor={handleNewAuthor}
-        newComment={newCom}
-        handleNewCom={handleNewCom}
+        // newComment={newCom}
+        // handleNewCom={handleNewCom}
          />
       <br></br>
       <div>
-        <BookList books={books}/>
+        <BookList books={books} handleDelete={handleDelete}/>
       </div>
     </div>
   )
