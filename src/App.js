@@ -23,6 +23,7 @@ const App = () => {
   // console.log('render', books.length, 'books')
   // console.log('Here are your books: ', books)
 
+    // Adding a book
   const addBook = (event) => {
     event.preventDefault()
     const bookObject = {
@@ -62,19 +63,22 @@ const App = () => {
     setNewComment(event.target.value)
   }
   
+  // Deleting a book
   const handleDelete = (book) => {
     console.log("Delete clicked");
     console.log(book.id);
 
-    axios.delete('http://localhost:4000/books/'+book.id)
-      .then(res => {
-        console.log(res.data, book.title);
-      
-      const updatedBookList = books.filter(b => b.id !== book.id);
-      
-      setBooks(updatedBookList);
-      console.log("Updated book list: ", updatedBookList);
+    window.confirm(`Poistetaanko ${book.title}?`) ?
+      axios.delete('http://localhost:4000/books/'+book.id)
+        .then(res => {
+          console.log(res.data, book.title);
+        
+        const updatedBookList = books.filter(b => b.id !== book.id);
+        
+        setBooks(updatedBookList);
+        console.log("Updated book list: ", updatedBookList);
       })
+      : console.log("Not removing");
   }
 
   return (
