@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button.jsx';
 
-const Book = ({ title, author, comments, index, onClick}) => {
+const Book = ({ title, author, comments, handleDelete, handleEdit }) => {
   // console.log({id})
   // console.log({title})
   // console.log({comments})
@@ -13,10 +13,18 @@ const Book = ({ title, author, comments, index, onClick}) => {
         <p>{author}</p>
         <p>{comments}</p>
       </li>
-      <Button
-        buttonText={"Poista"}
-        onClick={onClick}
-      />
+      <div style={{ display: "flex", flexDirection: "row"}}>
+        <Button
+          value={"Muokkaa"}
+          buttonText={"Muokkaa"}
+          onClick={handleEdit}
+        />
+        <Button
+          value={"Poista"}
+          buttonText={"Poista"}
+          onClick={handleDelete}
+        />
+      </div>
     </div>
   )
 }

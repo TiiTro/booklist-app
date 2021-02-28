@@ -62,6 +62,10 @@ const App = () => {
     // console.log(event.target.value)
     setNewComment(event.target.value)
   }
+
+  const handleEdit = (book) => {
+    console.log("Edit")
+  }
   
   // Deleting a book
   const handleDelete = (book) => {
@@ -94,7 +98,7 @@ const App = () => {
          />
       <br></br>
       <div>
-        <BookList books={books} handleDelete={handleDelete}/>
+        <BookList books={books} handleDelete={handleDelete} handleEdit={handleEdit}/>
       </div>
     </div>
   )

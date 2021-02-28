@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from '../snippets/Book.jsx';
 
-const BookList = ({ books, handleDelete }) => {
+const BookList = ({ books, handleDelete, handleEdit }) => {
   console.log("kirjalista-komponentti", books);
 
   return (
@@ -9,9 +9,10 @@ const BookList = ({ books, handleDelete }) => {
       <h1>Luetut kirjat</h1>
         <ul style={{listStyleType: "none"}}>
           {books.map((book) =>
-            <Book 
+            <Book
               key={book.id}
-              onClick={() => handleDelete(book)}
+              handleDelete={() => handleDelete(book)}
+              handleEdit={() => handleEdit(book)}
               title={book.title}
               author={book.author}
               comments={book.comments}
