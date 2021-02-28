@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import AddNewBookForm from './blocks/AddNewBookForm.jsx';
+import EditBookForm from './blocks/EditBookForm.jsx';
 import BookList from './blocks/BookList.jsx';
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newCom, setNewComment] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // fetching all books
   useEffect(() => {
@@ -63,8 +65,10 @@ const App = () => {
     setNewComment(event.target.value)
   }
 
+  //Editing a book
   const handleEdit = (book) => {
     console.log("Edit")
+    setModalIsOpen(true)
   }
   
   // Deleting a book
@@ -97,6 +101,7 @@ const App = () => {
         handleNewCom={handleNewCom}
          />
       <br></br>
+      <EditBookForm modalIsOpen={modalIsOpen}/>
       <div>
         <BookList books={books} handleDelete={handleDelete} handleEdit={handleEdit}/>
       </div>

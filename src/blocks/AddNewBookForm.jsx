@@ -7,16 +7,16 @@ const AddNewBookForm = (props) => {
     newTitle,
     newAuthor,
     newCom,
-    onSubmit,
 	  handleNewTitle,
 	  handleNewAuthor,
     handleNewCom,
-    submit
+    submit,
+    onSubmit
   } = props;
 
   return (
     <div>
-      <h3>Add new book</h3>
+      <h3>Lisää kirja</h3>
       <form onSubmit={onSubmit}>
 		    <Input 
 		    	label={"Kirjan nimi"}
