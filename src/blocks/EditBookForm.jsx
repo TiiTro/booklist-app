@@ -2,20 +2,23 @@ import React from 'react';
 import Modal from 'react-modal';
 import Input from '../snippets/Input';
 import Button from '../snippets/Button';
+import Book from '../snippets/Book';
+
 
 const EditBookForm = (props) => {
   const {
-    editedTitle,
-    editedAuthor,
-    editedCom,
-	  handleEditedTitle,
-	  handleEditedAuthor,
-    handleEditedComment,
+    editableTitle,
+    editableAuthor,
+    editableComment,
+	  handleNewTitle,
+	  handleNewAuthor,
+    handleNewCom,
     submit,
     onSubmit,
     handleSave,
     handleCancel,
-    modalIsOpen
+    modalIsOpen,
+    setModalIsOpen,
   } = props;
 
   return (
@@ -25,31 +28,32 @@ const EditBookForm = (props) => {
         <form onSubmit={onSubmit}>
 		      <Input 
 		      	label={"Kirjan nimi"}
-			      value={editedTitle}
-            onChange={handleEditedTitle}
+			      value={editableTitle}
+            onChange={handleNewTitle}
 			      />
 		      <br></br>
 			    <Input 
 		      	label={"Kirjoittaja"}
-			      value={editedAuthor}
-            onChange={handleEditedAuthor}
+			      value={editableAuthor}
+            onChange={handleNewAuthor}
 			    />
-          <br></br>
-          <Input 
+            <br></br>
+            <Input 
 		      	label={"Kommentit"}
-			      value={editedCom}
-            onChange={handleEditedComment}
+			      value={editableComment}
+            onChange={handleNewCom}
 			    />
           <div style={{ display: "flex", flexDirection: "row"}}>
             <Button
+              type={submit}
               value={"Tallenna"}
               buttonText={"Tallenna"}
-              onClick={handleSave}
+              // onClick={handleSave}
             />
             <Button
               value={"Peruuta"}
               buttonText={"Peruuta"}
-              onClick={handleCancel}
+              onClick={() => setModalIsOpen(false)}
             />
           </div>
 	      </form>

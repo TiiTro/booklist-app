@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import AddNewBookForm from './blocks/AddNewBookForm.jsx';
-import EditBookForm from './blocks/EditBookForm.jsx';
+// import EditBookForm from './blocks/EditBookForm.jsx';
 import BookList from './blocks/BookList.jsx';
 
 const App = () => {
@@ -65,10 +65,20 @@ const App = () => {
     setNewComment(event.target.value)
   }
 
+  const openEdit = () => setModalIsOpen(true)
+
   //Editing a book
   const handleEdit = (book) => {
-    console.log("Edit")
-    setModalIsOpen(true)
+    console.log("Edit", book.id, book.title)
+    // setModalIsOpen(true)
+    
+    // axios.get('http://localhost:4000/books/'+book.id)
+    //   .then(res => {
+    //     console.log("haetaan tiedot", res.data.title)
+    //     const editableTitle = res.data.title
+    //     console.log(editableTitle)
+    //   })
+    
   }
   
   // Deleting a book
@@ -101,9 +111,8 @@ const App = () => {
         handleNewCom={handleNewCom}
          />
       <br></br>
-      <EditBookForm modalIsOpen={modalIsOpen}/>
       <div>
-        <BookList books={books} handleDelete={handleDelete} handleEdit={handleEdit}/>
+        <BookList books={books} handleDelete={handleDelete} handleEdit={handleEdit} openEdit={openEdit} modalIsOpen={modalIsOpen} />
       </div>
     </div>
   )
