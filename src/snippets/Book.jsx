@@ -1,8 +1,7 @@
 import React from 'react';
-import EditBookForm from '../blocks/EditBookForm.jsx';
 import Button from './Button.jsx';
 
-const Book = ({ title, author, comments, handleDelete, openEdit, modalIsOpen, children }) => {
+const Book = ({ title, author, comments, handleDelete, openEdit }) => {
   // console.log({id})
   // console.log({title})
   // console.log({comments})
@@ -26,7 +25,6 @@ const Book = ({ title, author, comments, handleDelete, openEdit, modalIsOpen, ch
           onClick={handleDelete}
         />
       </div>
-      {children}
     </div>
   )
 }

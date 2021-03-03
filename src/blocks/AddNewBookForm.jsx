@@ -4,12 +4,12 @@ import Button from '../snippets/Button';
 
 const AddNewBookForm = (props) => {
   const {
-    newTitle,
-    newAuthor,
-    newCom,
-	  handleNewTitle,
-	  handleNewAuthor,
-    handleNewCom,
+    bookTitle,
+    bookAuthor,
+    bookComments,
+	  handlebookTitle,
+	  handlebookAuthor,
+    handlebookComments,
     submit,
     onSubmit
   } = props;
@@ -20,20 +20,20 @@ const AddNewBookForm = (props) => {
       <form onSubmit={onSubmit}>
 		    <Input 
 		    	label={"Kirjan nimi"}
-			    value={newTitle}
-          onChange={handleNewTitle}
+			    value={bookTitle}
+          onChange={handlebookTitle}
 			    />
 		    <br></br>
 			  <Input 
 		    	label={"Kirjoittaja"}
-			    value={newAuthor}
-          onChange={handleNewAuthor}
+			    value={bookAuthor}
+          onChange={handlebookAuthor}
 			  />
           <br></br>
           <Input 
 		    	label={"Kommentit"}
-			    value={newCom}
-          onChange={handleNewCom}
+			    value={bookComments}
+          onChange={handlebookComments}
 			  />
           <Button 
             type={submit}

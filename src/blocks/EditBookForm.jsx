@@ -2,46 +2,44 @@ import React from 'react';
 import Modal from 'react-modal';
 import Input from '../snippets/Input';
 import Button from '../snippets/Button';
-import Book from '../snippets/Book';
-
 
 const EditBookForm = (props) => {
   const {
-    editableTitle,
-    editableAuthor,
-    editableComment,
-	  handleNewTitle,
-	  handleNewAuthor,
-    handleNewCom,
+    bookTitle,
+    bookAuthor,
+    bookComments,
+	  handlebookTitle,
+	  handlebookAuthor,
+    handlebookComments,
     submit,
     onSubmit,
-    handleSave,
-    handleCancel,
     modalIsOpen,
-    setModalIsOpen,
+    closeModal
   } = props;
+
+  
 
   return (
     <div>
       <Modal isOpen={modalIsOpen}>
         <h3>Muokkaa kirjaa</h3>
         <form onSubmit={onSubmit}>
-		      <Input 
+		      <Input
 		      	label={"Kirjan nimi"}
-			      value={editableTitle}
-            onChange={handleNewTitle}
+			      value={bookTitle}
+            onChange={handlebookTitle}
 			      />
 		      <br></br>
 			    <Input 
 		      	label={"Kirjoittaja"}
-			      value={editableAuthor}
-            onChange={handleNewAuthor}
+			      value={bookAuthor}
+            onChange={handlebookAuthor}
 			    />
             <br></br>
             <Input 
 		      	label={"Kommentit"}
-			      value={editableComment}
-            onChange={handleNewCom}
+			      value={bookComments}
+            onChange={handlebookComments}
 			    />
           <div style={{ display: "flex", flexDirection: "row"}}>
             <Button
@@ -53,7 +51,7 @@ const EditBookForm = (props) => {
             <Button
               value={"Peruuta"}
               buttonText={"Peruuta"}
-              onClick={() => setModalIsOpen(false)}
+              onClick={closeModal}
             />
           </div>
 	      </form>
