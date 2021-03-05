@@ -13,7 +13,7 @@ const App = () => {
   const [bookId, setBookId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // fetching all books
+   
   useEffect(() => {
     console.log('effect')
     axios
@@ -76,33 +76,42 @@ const App = () => {
     setBookId(book.id)
   }
 
-  const closeModal = () => setModalIsOpen(false)
+  // closing modal without editing
+  const closeModal = () => {
+    setModalIsOpen(false)
+    setbookTitle('')
+    setbookAuthor('')
+    setbookComments('')
+  }
 
   // Edit a book
   const handleEdit = (event) => {
     event.preventDefault()
     console.log("Submitting edit")
 
-    const idToUpdate = bookId
     const bookObject = {
       title: bookTitle,
       author: bookAuthor,
-      comments: bookComments
+      comments: bookComments,
+      id: bookId
     }
     
     console.log(bookObject);
-    console.log(idToUpdate);
+    console.log(bookId);
 
-    axios.post('http://localhost:4000/books/update/'+idToUpdate, bookObject)
-      .then(res => {
-        console.log("axios, muokataan", res.data)
-    })
+    axios.post('http://localhost:4000/books/update/'+bookId, bookObject)
+      .then(updatedBook => {
+        console.log("axios, muokataan", updatedBook.data)
+        setBooks(books.map(book => book.id !== updatedBook.id ?
+          book : updatedBook));
+      })
     console.log("muokattu")
     setModalIsOpen(false)
     setbookTitle('')
     setbookAuthor('')
     setbookComments('')
     window.alert("Muokkaukset on tallennettu.")
+    
   }
 
   // Deleting a book
