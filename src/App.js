@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import personService from './services/books.js';
 
 import AddNewBookForm from './blocks/AddNewBookForm.jsx';
 import BookList from './blocks/BookList.jsx';
@@ -13,20 +14,20 @@ const App = () => {
   const [bookId, setBookId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-   
+
+  // fetching all books
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:4000/books')
-      .then(res => {
-        console.log('promise fulfilled')
-        setBooks(res.data)
-    })
-  }, []) // empty array means only running useEffect after first render
-  // console.log('render', books.length, 'books')
-  // console.log('Here are your books: ', books)
+    personService
+      .getAll()
+      .then(initialBooks => {
+        setBooks(initialBooks)
+      })
+  }, [])
 
-    // Adding a book
+  console.log(books)
+
+  // Adding a book
   const addBook = (event) => {
     event.preventDefault()
     const bookObject = {
@@ -89,17 +90,18 @@ const App = () => {
     event.preventDefault()
     console.log("Submitting edit")
 
+    const updateId = bookId
+
     const bookObject = {
       title: bookTitle,
       author: bookAuthor,
       comments: bookComments,
-      id: bookId
     }
     
     console.log(bookObject);
-    console.log(bookId);
+    console.log(updateId);
 
-    axios.post('http://localhost:4000/books/update/'+bookId, bookObject)
+    axios.post('http://localhost:4000/books/update/'+updateId, bookObject)
       .then(updatedBook => {
         console.log("axios, muokataan", updatedBook.data)
         setBooks(books.map(book => book.id !== updatedBook.id ?
@@ -120,7 +122,8 @@ const App = () => {
     console.log(book.id);
 
     window.confirm(`Poistetaanko ${book.title}?`) ?
-      axios.delete('http://localhost:4000/books/'+book.id)
+      personService
+        .remove(book.id)
         .then(res => {
           console.log(res.data, book.title);
         
