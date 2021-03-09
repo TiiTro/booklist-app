@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Telling Mongoose how the database object should be like
 const bookSchema = new mongoose.Schema({
     title: { type: String, required: true },
     author: String,

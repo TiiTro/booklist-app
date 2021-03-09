@@ -7,7 +7,7 @@ require('dotenv').config();
 
 //creating an express server
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 //setting up the middleware
 app.use(cors());
@@ -29,6 +29,7 @@ const booksRouter = require('./routes/books');
 //connecting the route-files
 app.use('/books', booksRouter);
 
+// running the server
 app.listen(port, () => {
-    console.log('Server running on port', port);
+    console.log(`Server running on port', ${port}`);
 });
