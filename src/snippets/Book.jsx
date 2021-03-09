@@ -13,7 +13,7 @@ const Book = ({ title, author, comments, handleDelete, openEdit }) => {
         <p>{author}</p>
         <p>{comments}</p>
       </li>
-      <div style={{ display: "flex", flexDirection: "row"}}>
+      <div style={{ display: "flex", flexDirection: "row", marginBottom: "35px"}}>
         <Button
           value={"Muokkaa"}
           buttonText={"Muokkaa"}

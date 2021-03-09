@@ -8,7 +8,7 @@ const BookList = ({ books, handleDelete, handleEdit, openEdit, modalIsOpen }) =>
   return (
     <div>
       <h1>Luetut kirjat</h1>
-        <ul style={{listStyleType: "none"}}>
+        <ul style={{listStyleType: "none", paddingInlineStart: "0"}}>
           {books.map((book) =>
             <Book
               key={book.id}

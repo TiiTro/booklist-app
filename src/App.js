@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import personService from './services/books.js';
+import bookService from './services/books.js';
 
 import AddNewBookForm from './blocks/AddNewBookForm.jsx';
 import BookList from './blocks/BookList.jsx';
@@ -16,13 +16,23 @@ const App = () => {
 
 
   // fetching all books
+  // useEffect(() => {
+  //   console.log('effect')
+  //   bookService
+  //     .getAll()
+  //     .then(initialBooks => {
+  //       setBooks(initialBooks)
+  //     })
+  // }, [])
+
   useEffect(() => {
     console.log('effect')
-    personService
-      .getAll()
-      .then(initialBooks => {
-        setBooks(initialBooks)
-      })
+    axios
+      .get('http://localhost:5000/books')
+      .then(res => {
+        console.log('promise fulfilled')
+        setBooks(res.data)
+    })
   }, [])
 
   console.log(books)
@@ -39,12 +49,18 @@ const App = () => {
     console.log("Kirja lisätään", bookObject)
     // console.log(books)
 
-    axios.post('http://localhost:4000/books/add', bookObject)
+    axios.post('http://localhost:5000/books/add', bookObject)
       .then(res => {
         // use concat to add new object without modifying state directly!
         setBooks(books.concat(bookObject))
         console.log("axios", res.data)
       });
+    bookService
+      .getAll()
+      .then(books => {
+        setBooks(books)
+        console.log("bookService")
+      })
 
     setbookTitle('')
     setbookAuthor('')
@@ -101,28 +117,31 @@ const App = () => {
     console.log(bookObject);
     console.log(updateId);
 
-    axios.post('http://localhost:4000/books/update/'+updateId, bookObject)
+    axios.post('http://localhost:5000/books/update/'+updateId, bookObject)
       .then(updatedBook => {
         console.log("axios, muokataan", updatedBook.data)
-        setBooks(books.map(book => book.id !== updatedBook.id ?
-          book : updatedBook));
       })
+    axios.get('http://localhost:5000/books/')
+      .then(res => {
+        console.log(res.data, "axios get")
+      })
+
     console.log("muokattu")
     setModalIsOpen(false)
     setbookTitle('')
     setbookAuthor('')
     setbookComments('')
-    window.alert("Muokkaukset on tallennettu.")
-    
+    // window.alert("Muokkaukset on tallennettu.")
   }
 
   // Deleting a book
   const handleDelete = (book) => {
     console.log("Delete clicked");
     console.log(book.id);
+    console.log(book.title);
 
     window.confirm(`Poistetaanko ${book.title}?`) ?
-      personService
+      bookService
         .remove(book.id)
         .then(res => {
           console.log(res.data, book.title);
@@ -136,7 +155,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div style={{ paddingTop: "10px", paddingLeft: "40px"}}>
       <AddNewBookForm 
         bookTitle={bookTitle}
         bookAuthor={bookAuthor}
